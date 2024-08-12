@@ -15,7 +15,12 @@ Um die `csv_analyzer_extended`-API zu installieren, entpacken Sie einfach die be
 ```bash
 pip install csv_analyzer_extended-1.1.zip
 ```
+Die aktuellste Version ist direkt über pip installierbar:
 
+https://pypi.org/project/csv-analyzer-extended/1.2/
+```bash
+pip install csv-analyzer-extended==1.2
+```
 ---
 
 ## Module Übersicht
