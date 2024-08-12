@@ -119,10 +119,10 @@ Die `CSVFilter`-Klasse bietet umfangreiche Filter- und Abfragefunktionen:
 - **in_(subquery_function, *args)**: Überprüft, ob ein Wert in den Ergebnissen einer verschachtelten Abfrage vorhanden ist.
 - **self_join(column_name)**: Führt einen Self Join mit sich selbst durch.
 - **cross_join(other_data)**: Führt einen Kreuzprodukt-Join mit einem anderen Datensatz durch.
-- **case_when(conditions)**: Führt bedingte Abfragen durch
+- **case_when(conditions)**: Führt bedingte Abfragen durch.
+- **pivot(index
 
-.
-- **pivot(index_column, columns_column, values_column)**: Erstellt eine Pivot-Tabelle.
+_column, columns_column, values_column)**: Erstellt eine Pivot-Tabelle.
 - **unpivot(columns)**: Macht eine Pivot-Tabelle rückgängig.
 - **rolling_window(column_name, window_size, agg_func)**: Führt eine rollende Berechnung durch.
 - **time_series_forecast(column_name, method='mean')**: Führt eine Zeitreihenprognose durch.
@@ -160,19 +160,64 @@ Die `CSVAnalyzerHelp`-Klasse bietet eine einfache Möglichkeit, die verfügbaren
 
 Die API wird mit einer umfassenden Test-Suite geliefert, die die Funktionalität aller Klassen validiert. Die Testdateien sind nach den Modulen organisiert, die sie testen, und stellen sicher, dass alle Methoden unter verschiedenen Bedingungen korrekt funktionieren.
 
-Um die Tests auszuführen, navigieren Sie zum Testverzeichnis und führen Sie folgenden Befehl aus:
+### Auflistung der Testdateien
 
-```bash
-python -m unittest discover
-```
+#### 1. CSVAnalyzer
 
-### Testdateien:
+- **TestCSVVisualization2.py**: Testet die Visualisierungsfunktionen des CSVAnalyzers.
 
-- **Test Summarizer**: Testet alle statistischen Funktionen in `summarizer.py`.
-- **Test Analyzer**: Testet Analysefunktionen, Datenbereinigung und Methoden zur Parallelverarbeitung.
-- **Test Filter**: Validiert die Filter- und Abfragefunktionen von `filter.py`.
-- **Test Sorter**: Stellt sicher, dass die Sortierfunktionen, einschließlich Multi-Column- und Parallelsortierung, korrekt funktionieren.
-- **Test Exporter**: Testet den Datenexport in verschiedene Formate, einschließlich CSV, JSON, Excel, PDF und mehr.
+#### 2. CSVExporter
+
+- **test_export_empty_data.py**: Überprüft das Verhalten des Exports, wenn keine Daten vorhanden sind.
+- **test_export_large_data_to_csv.py**: Testet den Export großer Datenmengen in eine CSV-Datei.
+- **test_export_large_data_to_json.py**: Testet den Export großer Datenmengen in eine JSON-Datei.
+- **test_export_to_csv.py**: Überprüft den korrekten Export von Daten in eine CSV-Datei.
+- **test_export_to_excel.py**: Testet den Export von Daten in eine Excel-Datei.
+- **test_export_to_json.py**: Überprüft den korrekten Export von Daten in eine JSON-Datei.
+- **test_export_to_markdown.py**: Testet den Export von Daten in eine Markdown-Datei.
+- **test_export_to_pdf.py**: Überprüft den korrekten Export von Daten in eine PDF-Datei.
+- **test_export_to_sql.py**: Testet den Export von Daten in eine SQL-Datenbank.
+- **test_export_to_xml.py**: Überprüft den Export von Daten in eine XML-Datei.
+- **test_export_with_special_characters.py**: Testet den Export von Daten, die Sonderzeichen enthalten.
+
+#### 3. CSVFilterTests
+
+- **test_contains_text.py**: Testet die Filterfunktion nach Textinhalt in einer Spalte.
+- **test_cumulative_sum.py**: Überprüft die Berechnung der kumulativen Summe einer Spalte.
+- **test_export_analysis_first_column.py**: Testet den Export der Analyseergebnisse der ersten Spalte.
+- **test_group_by_and_aggregation.py**: Überprüft die Gruppierung und Aggregation von Daten.
+- **test_inner_join.py**: Testet die Funktion eines Inner Joins.
+- **test_join_and_export.py**: Testet die Verknüpfung von Daten und deren Export.
+- **test_multi_column_analysis.py**: Überprüft die Analyse mehrerer Spalten.
+- **test_multi_column_filter.py**: Testet die Filterung von Daten basierend auf mehreren Spalten.
+- **test_select_columns.py**: Testet die Auswahl bestimmter Spalten aus den Daten.
+- **test_sort_and_select.py**: Überprüft die Sortierung und anschließende Auswahl von Daten.
+
+#### 4. CSVSorter
+
+- **test_multi_column_sort.py**: Testet die Sortierung von Daten basierend auf mehreren Spalten.
+- **test_parallel_sort.py**: Überprüft die parallele Sortierung von Daten.
+- **test_sort_by_column.py**: Testet die Sortierung von Daten basierend auf einer einzelnen Spalte.
+
+#### 5. CSVSummarizer
+
+- **test_calculate_max.py**: Überprüft die Berechnung des maximalen Wertes einer Spalte.
+- **test_calculate_mean.py**: Testet die Berechnung des Durchschnittswertes einer Spalte.
+- **test_calculate_median.py**: Überprüft die Berechnung des Medianwertes einer Spalte.
+- **test_calculate_min.py**: Testet die Berechnung des minimalen Wertes einer Spalte.
+- **test_calculate_mode.py**: Überprüft die Berechnung des häufigsten Wertes in einer Spalte.
+- **test_calculate_percentile.py**: Testet die Berechnung eines Perzentilwertes in einer Spalte.
+- **test_calculate_range.py**: Überprüft die Berechnung der Spannweite einer Spalte.
+- **test_calculate_std_dev.py**: Testet die Berechnung der Standardabweichung einer Spalte.
+- **test_calculate_sum.py**: Überprüft die Berechnung der Summe in einer Spalte.
+- **test_calculate_variance.py**: Testet die Berechnung der Varianz in einer Spalte.
+- **test_calculate_z_scores.py**: Überprüft die Berechnung der Z-Scores für eine Spalte.
+- **test_create_histogram.py**: Testet die Erstellung eines Histogramms für eine Spalte.
+- **test_find_outliers.py**: Überprüft die Erkennung von Ausreißern in einer Spalte.
+- **test_mmap_calculate_max.py**: Testet die Berechnung des maximalen Wertes mithilfe von Speicher-Mapping.
+- **test_mmap_calculate_sum.py**: Überprüft die Berechnung der Summe mithilfe von Speicher-Mapping.
+- **test_most_frequent_values.py**: Testet die Ermittlung der häufigsten Werte in einer Spalte.
+- **test_parallel_calculate_sum.py**: Überprüft die parallele Berechnung der Summe in einer Spalte.
 
 ---
 
@@ -215,4 +260,3 @@ Beiträge sind willkommen! Bitte forken Sie das Repository und senden Sie einen 
 ## Lizenz
 
 Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe die [LICENSE](LICENSE)-Datei für Details.
-
