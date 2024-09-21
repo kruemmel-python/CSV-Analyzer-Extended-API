@@ -28,11 +28,17 @@ pip install csv-analyzer-extended==1.2
 
 ## Module Übersicht
 
+
+
+---
+
 ### 1. `summarizer.py`
 
-Die `CSVSummarizer`-Klasse bietet eine breite Palette an Funktionen zur Analyse und statistischen Auswertung von CSV-Daten, darunter:
+Die `CSVSummarizer`-Klasse bietet eine umfassende Sammlung von Funktionen zur Analyse und statistischen Auswertung von CSV-Daten. Sie unterstützt sowohl serielle als auch parallele Berechnungen sowie effiziente Dateioperationen mit Speicher-Mapping (Memory Mapping). Neue Funktionen wie Fortschrittsanzeige, Anomalieerkennung und das Auffüllen fehlender Werte wurden hinzugefügt.
 
-- **most_frequent_values(column_name)**: Findet den häufigsten Wert in einer Spalte.
+#### Funktionen:
+
+- **most_frequent_values(column_name)**: Findet den häufigsten Wert in einer Spalte und gibt sowohl den Wert als auch die Häufigkeit zurück.
 - **find_outliers(column_name, threshold=1.5)**: Ermittelt Ausreißer in einer Spalte basierend auf dem Interquartilsabstand (IQR).
 - **create_histogram(column_name, bins=10)**: Erstellt ein Histogramm für eine numerische Spalte.
 - **calculate_sum(column_name)**: Berechnet die Summe der Werte in einer Spalte.
@@ -45,30 +51,49 @@ Die `CSVSummarizer`-Klasse bietet eine breite Palette an Funktionen zur Analyse 
 - **calculate_std_dev(column_name)**: Berechnet die Standardabweichung einer Spalte.
 - **calculate_range(column_name)**: Berechnet die Spannweite (Range) einer Spalte.
 - **calculate_percentile(column_name, percentile)**: Bestimmt einen bestimmten Perzentilwert einer Spalte.
-- **calculate_z_scores(column_name)**: Berechnet die Z-Scores (Standardisierte Werte) für eine Spalte.
+- **calculate_z_scores(column_name)**: Berechnet die Z-Scores (standardisierte Werte) für eine Spalte.
 - **parallel_calculate_sum(column_name)**: Nutzt Multiprocessing, um die Summe der Werte in einer Spalte parallel zu berechnen.
+- **parallel_calculate_mean(column_name)**: Nutzt Multiprocessing, um den Durchschnittswert einer Spalte parallel zu berechnen.
+- **parallel_calculate_std_dev(column_name)**: Nutzt Multiprocessing, um die Standardabweichung einer Spalte parallel zu berechnen.
 - **mmap_calculate_sum(column_name, file_path)**: Verwendet Speicher-Mapping, um die Summe der Werte in einer großen Datei effizient zu berechnen.
 - **mmap_calculate_max(column_name, file_path)**: Verwendet Speicher-Mapping, um den maximalen Wert in einer großen Datei effizient zu berechnen.
+- **mmap_calculate_mean(column_name, file_path)**: Verwendet Speicher-Mapping, um den Durchschnittswert in einer großen Datei effizient zu berechnen.
+- **mmap_calculate_std_dev(column_name, file_path)**: Verwendet Speicher-Mapping, um die Standardabweichung in einer großen Datei effizient zu berechnen.
+- **calculate_mean_with_progress(column_name)**: Berechnet den Durchschnittswert einer Spalte mit einer Fortschrittsanzeige (nützlich bei großen Datenmengen).
+- **detect_anomalies_isolation_forest(column_name)**: Nutzt den Isolation Forest Algorithmus zur Anomalieerkennung in einer Spalte.
+- **fill_missing_values_knn(column_name, n_neighbors=5)**: Füllt fehlende Werte in einer Spalte mithilfe des KNN-Algorithmus auf.
+
+---
+
+---
 
 ### 2. `analyzer.py`
 
-Die `CSVAnalyzer`-Klasse bietet verschiedene Funktionen zur Analyse, Bereinigung und statistischen Auswertung von CSV-Daten:
+Die `CSVAnalyzer`-Klasse bietet eine Vielzahl von Funktionen zur Analyse, Bereinigung und statistischen Auswertung von CSV-Daten. Neu hinzugefügte Funktionen beinhalten t-Tests, das Speichern und Laden von Modellen, sowie das Auffüllen fehlender Werte mithilfe des KNN-Imputers.
 
-- **__init__(file_path)**: Initialisiert den Analyzer mit dem Pfad zur CSV-Datei.
-- **analyze_and_export(column_name, output_file)**: Analysiert eine Spalte und exportiert die Ergebnisse als CSV.
-- **incremental_median(column_name)**: Berechnet den Median einer Spalte inkrementell.
-- **calculate_std_dev(column_name)**: Berechnet die Standardabweichung einer Spalte.
-- **calculate_variance(column_name)**: Berechnet die Varianz einer Spalte.
-- **detect_anomalies_simple(column_name, threshold=1.5)**: Ermittelt einfache Anomalien in einer Spalte.
-- **calculate_correlation(col1, col2, method='pearson')**: Berechnet die Korrelation zwischen zwei Spalten.
-- **linear_regression(target_col, *feature_cols)**: Führt eine lineare Regression durch.
-- **remove_duplicates()**: Entfernt doppelte Einträge.
-- **fill_missing_values(column_name, strategy="mean")**: Füllt fehlende Werte in einer Spalte auf.
-- **normalize_column(column_name)**: Normalisiert die Werte einer Spalte.
-- **standardize_column(column_name)**: Standardisiert die Werte einer Spalte.
-- **parallel_analyze_column(column_name, num_threads=4)**: Führt eine parallele Analyse einer Spalte durch.
-- **memory_mapped_analyze(column_name)**: Analysiert eine Spalte mithilfe von Speicher-Mapping.
-- **index_column(column_name)**: Erstellt einen Index für eine Spalte, um Abfragen zu beschleunigen.
+#### Funktionen:
+
+- **`__init__(file_path)`**: Initialisiert den Analyzer mit dem Pfad zur CSV-Datei.
+- **`analyze_and_export(column_name, output_file)`**: Analysiert eine Spalte und exportiert die Ergebnisse als CSV.
+- **`incremental_median(column_name)`**: Berechnet den Median einer Spalte inkrementell.
+- **`calculate_std_dev(column_name)`**: Berechnet die Standardabweichung einer Spalte.
+- **`calculate_variance(column_name)`**: Berechnet die Varianz einer Spalte.
+- **`detect_anomalies_simple(column_name, threshold=1.5)`**: Ermittelt einfache Anomalien in einer Spalte.
+- **`calculate_correlation(col1, col2, method='pearson')`**: Berechnet die Korrelation zwischen zwei Spalten (Pearson oder Spearman).
+- **`linear_regression(target_col, *feature_cols)`**: Führt eine lineare Regression durch und gibt die Koeffizienten und den Achsenabschnitt zurück.
+- **`t_test(column1, column2)`**: Führt einen t-Test zwischen zwei Spalten durch.
+- **`save_model(model, file_path)`**: Speichert ein Modell mit Joblib in einer Datei.
+- **`load_model(file_path)`**: Lädt ein gespeichertes Modell von einer Datei.
+- **`remove_duplicates()`**: Entfernt doppelte Einträge aus den Daten.
+- **`fill_missing_values(column_name, strategy='mean')`**: Füllt fehlende Werte in einer Spalte auf (mit Strategien: "mean", "median", oder "mode").
+- **`normalize_column(column_name)`**: Normalisiert die Werte einer Spalte.
+- **`standardize_column(column_name)`**: Standardisiert die Werte einer Spalte.
+- **`parallel_analyze_column(column_name, num_threads=4)`**: Führt eine parallele Analyse einer Spalte durch.
+- **`memory_mapped_analyze(column_name)`**: Analysiert eine Spalte mithilfe von Speicher-Mapping.
+- **`index_column(column_name)`**: Erstellt einen Index für eine Spalte, um Abfragen zu beschleunigen.
+- **`fill_missing_values_knn(column_name, n_neighbors=5)`**: Füllt fehlende Werte in einer Spalte mithilfe des KNN-Imputers auf.
+
+---
 
 ### 3. `sorter.py`
 
@@ -148,7 +173,42 @@ Die `CSVExporter`-Klasse bietet umfangreiche Exportfunktionen:
 - **export_to_sql(table_name, cursor)**: Exportiert die Daten in eine SQL-Datenbank.
 - **export_to_xml(file_path)**: Exportiert die Daten in eine XML-Datei.
 
-### 6. `helper.py`
+
+
+### 6. **`clustering.py`**  
+   Dieses Modul bietet die Möglichkeit, CSV-Daten in Cluster zu unterteilen:
+   - **`cluster_data(n_clusters, *column_names)`**: Verwendet den KMeans-Algorithmus, um die Daten in einer angegebenen Anzahl von Clustern zu gruppieren. Es werden eine oder mehrere Spalten als Eingabe verwendet.
+
+### 7. **`cross_validation.py`**  
+   Bietet Funktionen zur Kreuzvalidierung von Regressionsmodellen:
+   - **`cross_validate_regression(target_col, *feature_cols, cv=5)`**: Führt eine Kreuzvalidierung für eine lineare Regression durch und berechnet den Mittelwert der Scores.
+
+### 8. **`data_type_detection.py`**  
+   Dieses Modul erkennt den Datentyp von CSV-Spalten:
+   - **`detect_column_types()`**: Bestimmt, ob eine Spalte numerische, Text- oder Datumswerte enthält.
+
+### 9. **`profiling.py`**  
+   Führt eine detaillierte Datenprofilierung durch:
+   - **`data_profiling()`**: Erstellt ein Profil einer Spalte, das Informationen über den Mittelwert, die Standardabweichung, die Anzahl fehlender Werte sowie den minimalen und maximalen Wert enthält.
+
+### 10. **`sampling.py`**  
+   Stellt Sampling-Methoden für CSV-Daten bereit:
+   - **`random_sample(sample_size)`**: Wählt eine zufällige Stichprobe von Daten aus.
+   - **`systematic_sample(interval)`**: Wählt Daten in einem bestimmten Intervall aus (z.B. jede dritte Zeile).
+
+### 11. **`time_series_analysis.py`**  
+   Dieses Modul bietet Funktionen zur Analyse von Zeitreihen:
+   - **`moving_average(column_name, window_size)`**: Berechnet den gleitenden Durchschnitt einer Spalte über ein bestimmtes Fenster.
+   - **`exponential_smoothing(column_name, alpha)`**: Wendet exponentielle Glättung auf eine Spalte an.
+
+### 12. **`visualizer.py`**  
+   Stellt Funktionen zur Visualisierung der CSV-Daten zur Verfügung:
+   - **`plot_histogram(column_name, bins=10)`**: Erstellt ein Histogramm für eine numerische Spalte.
+   - **`plot_scatter(col1, col2)`**: Erstellt ein Streudiagramm zweier numerischer Spalten.
+
+
+
+### 13. `helper.py`
 
 Die `CSVAnalyzerHelp`-Klasse bietet eine einfache Möglichkeit, die verfügbaren Funktionen der API anzuzeigen und Unterstützung zu erhalten:
 
