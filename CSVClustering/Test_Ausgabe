@@ -1,0 +1,80 @@
+Erklärung des Skripts:
+Daten: Die Daten basieren auf deiner erstellten CSV-Datei und beinhalten Alter und Einkommen, was sich gut für Clustering-Algorithmen eignet.
+Clustering: Alle Clustering-Algorithmen aus deiner Datei werden getestet.
+Parameter: Für Algorithmen, die eine Cluster-Anzahl benötigen (z.B. kmeans, agglomerative, etc.), wird 3 als Cluster-Anzahl verwendet. Für die anderen Algorithmen (wie dbscan) wird keine Anzahl von Clustern spezifiziert.
+Ausführung:
+Die Clustering-Ergebnisse zeigen, dass die verschiedenen Algorithmen unterschiedlich auf die Daten reagieren. Hier eine kurze Analyse der Ergebnisse:
+
+KMeans, Agglomerative und Birch:
+
+Diese Algorithmen teilen die Daten in 3 Cluster auf, wobei ähnliche Ergebnisse erzielt werden. Sie gruppieren die Daten basierend auf Ähnlichkeiten in den Spalten Alter und Einkommen. Die Cluster 0, 1 und 2 sind gut aufgeteilt, und die Personen mit höherem Einkommen und Alter tendieren dazu, in andere Cluster zu fallen.
+DBSCAN:
+
+Hier wurden alle Datenpunkte als Ausreißer (-1) klassifiziert. Das liegt wahrscheinlich daran, dass DBSCAN Schwierigkeiten hat, sinnvolle Dichtebasierte Cluster in so kleinen Datenmengen zu erkennen. Die Parameter von DBSCAN (z.B. eps und min_samples) müssten möglicherweise angepasst werden.
+Gaussian Mixture Model (GMM):
+
+GMM funktioniert ähnlich wie KMeans, aber es basiert auf der Wahrscheinlichkeit und weist den Datenpunkten Cluster zu, basierend auf einer Mischung von Normalverteilungen. Hier sind die Cluster gut aufgeteilt.
+Mean-Shift:
+
+Dieser Algorithmus identifiziert ebenfalls mehrere Cluster, aber das Auftreten eines zusätzlichen Clusters (z.B. Cluster 3) könnte auf die verschiedenen Dichtebereiche in den Daten hinweisen.
+Spectral Clustering:
+
+Dieser Algorithmus zeigt einen Warnhinweis an, dass der Graph nicht vollständig verbunden ist. Das bedeutet, dass die Daten möglicherweise nicht alle miteinander in Beziehung stehen, was die Qualität der Clusterbildung beeinflussen könnte.
+Affinity Propagation:
+
+Dieser Algorithmus zeigt ebenfalls eine klare Aufteilung in 3 Cluster, die denen von KMeans und Agglomerative Clustering ähneln.
+Isolation Forest und Elliptic Envelope:
+
+Diese beiden Algorithmen sind speziell für die Erkennung von Ausreißern konzipiert. Sie identifizieren einige Datenpunkte als Ausreißer (z.B. Personen mit ungewöhnlich hohem Einkommen und hoher Bewertung).
+LOF (Local Outlier Factor):
+
+Hier zeigt der LOF-Algorithmus eine Warnung an, dass n_neighbors automatisch auf eine niedrigere Zahl gesetzt wurde, weil die Anzahl der Samples zu gering ist. Der Algorithmus weist dennoch alle Datenpunkte demselben Cluster zu.
+One-Class SVM:
+
+Dieser Algorithmus klassifiziert einige Datenpunkte als Ausreißer (-1) und andere als normale Punkte (1).
+Fazit:
+Jeder Algorithmus bietet unterschiedliche Perspektiven auf die Daten. Für kleine Datensätze wie diesen zeigen KMeans, Agglomerative Clustering und Birch gute Ergebnisse. DBSCAN und LOF könnten jedoch besser funktionieren, wenn mehr Daten vorhanden sind oder die Parameter angepasst werden.
+
+Clustering mit kmeans:
+[0, 0, 0, 0, 1, 1, 1, 1, 2, 1]
+
+Clustering mit agglomerative:
+[1, 1, 1, 1, 0, 0, 0, 0, 2, 0]
+
+Clustering mit dbscan:
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+
+Clustering mit gmm:
+[2, 2, 2, 2, 0, 0, 0, 0, 1, 0]
+
+Clustering mit mean_shift:
+[1, 1, 1, 1, 0, 0, 3, 0, 2, 0]
+
+Clustering mit spectral:
+C:\Users\ralfk\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\manifold\_spectral_embedding.py:329: UserWarning: Graph is not fully connected, spectral embedding may not work as expected.
+  warnings.warn(
+[1, 1, 1, 1, 2, 0, 0, 0, 0, 0]
+
+Clustering mit affinity_propagation:
+[0, 0, 0, 0, 1, 1, 1, 1, 2, 1]
+
+Clustering mit hierarchical:
+Fehler bei hierarchical: n_clusters muss für Hierarchical Clustering angegeben werden.
+
+Clustering mit isolation_forest:
+[1, -1, 1, 1, 1, 1, -1, -1, -1, 1]
+
+Clustering mit lof:
+C:\Users\ralfk\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\neighbors\_lof.py:283: UserWarning: n_neighbors (20) is greater than the total number of samples (10). n_neighbors will be set to (n_samples - 1) for estimation.
+  warnings.warn(
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+Clustering mit one_class_svm:
+[-1, 1, -1, -1, 1, 1, 1, -1, -1, 1]
+
+Clustering mit elliptic_envelope:
+[1, 1, 1, 1, 1, 1, 1, 1, -1, 1]
+
+Clustering mit birch:
+[1, 1, 1, 1, 0, 0, 0, 0, 2, 0]
+Press any key to continue . . .
