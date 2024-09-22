@@ -18,12 +18,7 @@ ndjson
 cbor2
 geojson
 google-auth
-google-cloud-bigquery
-scipy.io
-savreaderwriter
-sas7bdat
-rpy2
-pystata
+google-cloud-bigquery==3.25.0
 xlsxwriter
 kafka-python
 odfpy
@@ -31,4 +26,3 @@ fpdf
 protobuf
 matplotlib
 tqdm
-
