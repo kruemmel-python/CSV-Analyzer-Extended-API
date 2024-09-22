@@ -30,6 +30,7 @@ columns_to_cluster = ['Alter', 'Einkommen']
 for algo in algorithms:
     print(f"\nClustering mit {algo}:")
     try:
+        # Algorithmen, die n_clusters benötigen
         if algo in ['kmeans', 'agglomerative', 'gmm', 'spectral', 'birch']:
             labels = clustering.cluster_data(algo, 3, *columns_to_cluster)  # 3 Cluster für diese Algorithmen
         else:
