@@ -27,3 +27,4 @@ protobuf
 matplotlib
 tqdm
 pyorc-0.9.0
+savreaderwriter
